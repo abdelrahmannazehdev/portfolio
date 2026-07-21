@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../core/app_theme.dart';
+import '../core/utils.dart';
 
 class ProjectData {
   final String title;
@@ -34,10 +34,6 @@ class ProjectCard extends StatefulWidget {
 
 class _ProjectCardState extends State<ProjectCard> {
   bool _hover = false;
-
-  Future<void> _openUrl(String url) async {
-    await launchUrl(Uri.parse(url), webOnlyWindowName: '_blank');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +169,7 @@ class _ProjectCardState extends State<ProjectCard> {
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton.icon(
-                    onPressed: () => _openUrl(d.liveUrl!),
+                    onPressed: () => openUrl(d.liveUrl!),
                     icon: const Icon(Icons.open_in_new, size: 14),
                     label: const Text('Live Demo'),
                     style: OutlinedButton.styleFrom(

@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../core/app_theme.dart';
+import '../core/utils.dart';
 import 'section_wrapper.dart';
 
 class ContactSection extends StatelessWidget {
   final GlobalKey sectionKey;
   const ContactSection({super.key, required this.sectionKey});
-
-  Future<void> _open(String url) async {
-    await launchUrl(Uri.parse(url), webOnlyWindowName: '_blank');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,19 +40,19 @@ class ContactSection extends StatelessWidget {
               _ContactPill(
                 label: 'abdelrahmannazehdev@gmail.com',
                 icon: Icons.email_outlined,
-                onTap: () => _open('mailto:abdelrahmannazehdev@gmail.com'),
+                onTap: () => openUrl('mailto:abdelrahmannazehdev@gmail.com'),
               ),
               _ContactPill(
                 label: 'LinkedIn',
                 icon: Icons.link,
-                onTap: () => _open(
+                onTap: () => openUrl(
                     'https://linkedin.com/in/abdelrahman-nazeh-dev'),
               ),
               _ContactPill(
                 label: 'GitHub',
                 icon: Icons.code,
                 onTap: () =>
-                    _open('https://github.com/AbdelrahmanNazeh74'),
+                    openUrl('https://github.com/AbdelrahmanNazeh74'),
               ),
             ],
           ),

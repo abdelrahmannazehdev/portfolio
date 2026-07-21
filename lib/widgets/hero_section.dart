@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../core/app_theme.dart';
 import '../core/responsive.dart';
+import '../core/utils.dart';
 import 'animated_module_map.dart';
 
 class HeroSection extends StatelessWidget {
@@ -15,11 +15,7 @@ class HeroSection extends StatelessWidget {
 
   Future<void> _downloadResume() async {
     final uri = Uri.base.resolve('Abdelrahman_Nazeh_Resume.pdf');
-    await launchUrl(uri, webOnlyWindowName: '_blank');
-  }
-
-  Future<void> _openUrl(String url) async {
-    await launchUrl(Uri.parse(url), webOnlyWindowName: '_blank');
+    await openUrl(uri.toString());
   }
 
   @override
@@ -118,12 +114,12 @@ class HeroSection extends StatelessWidget {
                 icon: Icons.code,
                 label: 'GitHub',
                 onTap: () =>
-                    _openUrl('https://github.com/AbdelrahmanNazeh74'),
+                    openUrl('https://github.com/AbdelrahmanNazeh74'),
               ),
               _SocialIcon(
                 icon: Icons.link,
                 label: 'LinkedIn',
-                onTap: () => _openUrl(
+                onTap: () => openUrl(
                     'https://linkedin.com/in/abdelrahman-nazeh-dev'),
               ),
               Container(

@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 class RevealOnScroll extends StatefulWidget {
   final Widget child;
   final ScrollController controller;
-  final Duration delay;
 
   const RevealOnScroll({
     super.key,
     required this.child,
     required this.controller,
-    this.delay = Duration.zero,
   });
 
   @override
