@@ -1,0 +1,26 @@
+# Flutter/Dart/Pub
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/pubspec.lock
+
+# Mobile/desktop platform folders — not needed for a web-only portfolio.
+# NOTE: /web/ is intentionally NOT ignored — it holds index.html and your
+# CV PDF, both needed to deploy the site.
+/android/
+/ios/
+/macos/
+/linux/
+/windows/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# misc
+.DS_Store
