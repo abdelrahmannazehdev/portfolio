@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../core/app_theme.dart';
 import 'about_section.dart';
+import 'achievements_section.dart';
 import 'background_grid.dart';
 import 'contact_section.dart';
 import 'experience_section.dart';
@@ -40,7 +41,7 @@ class _PortfolioHomeState extends State<PortfolioHome> {
     if (ctx != null) {
       Scrollable.ensureVisible(
         ctx,
-        duration: const Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 400),
         curve: Curves.easeInOut,
       );
     }
@@ -71,17 +72,20 @@ class _PortfolioHomeState extends State<PortfolioHome> {
                         sectionKey: _heroKey,
                         onViewProjects: () => _scrollTo('projects'),
                       ),
+                      const AchievementsSection(),
                       RevealOnScroll(
                         controller: _scrollController,
                         child: AboutSection(sectionKey: _aboutKey),
                       ),
                       RevealOnScroll(
                         controller: _scrollController,
-                        child: ExperienceSection(sectionKey: _experienceKey),
+                        child:
+                            ExperienceSection(sectionKey: _experienceKey),
                       ),
                       RevealOnScroll(
                         controller: _scrollController,
-                        child: ProjectsSection(sectionKey: _projectsKey),
+                        child:
+                            ProjectsSection(sectionKey: _projectsKey),
                       ),
                       RevealOnScroll(
                         controller: _scrollController,
@@ -89,7 +93,8 @@ class _PortfolioHomeState extends State<PortfolioHome> {
                       ),
                       RevealOnScroll(
                         controller: _scrollController,
-                        child: ContactSection(sectionKey: _contactKey),
+                        child:
+                            ContactSection(sectionKey: _contactKey),
                       ),
                       const FooterSection(),
                     ],

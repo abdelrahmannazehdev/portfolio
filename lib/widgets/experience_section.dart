@@ -12,13 +12,13 @@ class ExperienceSection extends StatelessWidget {
     return SectionWrapper(
       sectionKey: sectionKey,
       eyebrow: '02 · Experience',
-      child: Column(
+      child: const Column(
         children: [
           _ExperienceItem(
             title: 'Flutter Developer',
             date: 'Dec 2023 — Present',
             org: 'WeCodeForYou.io · Hybrid, Cairo',
-            points: const [
+            points: [
               'Architected 5 independent feature modules (document editor, spreadsheet editor, presentation builder, cloud storage) using Bloc/Cubit with a shared service-delegation pattern over a single Dio instance — cutting boilerplate by 35%.',
               'Led delivery of a real-time collaboration platform: WebRTC video calling, persistent WebSocket chat, integrated email client, and task planner across 6 independently developed feature areas with zero cross-module coupling.',
               'Delivered full RTL/Arabic localization (354 translation keys) across 30+ screens; configured GitHub Actions CI/CD for automatic release builds.',
@@ -30,7 +30,7 @@ class ExperienceSection extends StatelessWidget {
             title: 'Intern — Flutter Developer',
             date: 'Feb 2022 — Feb 2023',
             org: 'Orange Digital Centre · Cairo',
-            points: const [
+            points: [
               'Built 2+ production-style mobile applications applying Flutter, UI/UX, and mobile architecture fundamentals.',
               'Participated in 10+ code reviews and received direct mentorship from senior engineers.',
             ],

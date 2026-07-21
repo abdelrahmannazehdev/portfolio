@@ -6,51 +6,81 @@ class ProjectsSection extends StatelessWidget {
   final GlobalKey sectionKey;
   const ProjectsSection({super.key, required this.sectionKey});
 
-  // Replace `imageAsset: null` with a real path once you have screenshots,
-  // e.g. imageAsset: 'assets/images/weco_suite_1.png'
   static const _projects = [
     ProjectData(
       title: 'We-Co Corporate Suite',
+      projectType: 'Enterprise Productivity Platform',
       description:
-          "Unified enterprise productivity suite — document editor, "
-          "spreadsheet editor, slide builder, and cloud storage — "
+          'Unified enterprise productivity suite — document editor, '
+          'spreadsheet editor, slide builder, and cloud storage — '
           "delivered as WeCodeForYou.io's flagship internal product.",
       tags: ['Flutter', 'Bloc/Cubit', 'REST', 'GoRouter', 'CI/CD'],
-      imageAsset: null,
+      contributions: [
+        'Architected 5 independent feature modules with shared service-delegation pattern',
+        'Cut boilerplate by 35% across document, spreadsheet, and presentation editors',
+        'Delivered full RTL/Arabic localization across 30+ screens',
+      ],
+      isPrivate: true,
     ),
     ProjectData(
       title: 'We-Co Collaboration Platform',
+      projectType: 'Real-Time Communication Platform',
       description:
           'Real-time video/audio calling, persistent team chat, integrated '
-          'email client, and a task planner in one cross-platform app.',
+          'email client, and a task planner — all in one cross-platform '
+          'application with zero cross-module coupling.',
       tags: ['Flutter', 'Bloc', 'LiveKit / WebRTC', 'WebSocket'],
-      imageAsset: null,
+      contributions: [
+        'Led delivery of WebRTC video calling and persistent WebSocket chat',
+        'Integrated email client and task planner across 6 feature areas',
+        'Achieved zero cross-module coupling through clean interface contracts',
+      ],
+      isPrivate: true,
     ),
     ProjectData(
       title: 'DocNMore — Healthcare Platform',
+      projectType: 'Healthcare Booking System',
       description:
-          'Cross-platform (mobile + web) clinic and doctor discovery/booking '
-          'app with real-time availability, Stripe payments, and a '
-          'BackOffice admin panel.',
+          'Cross-platform clinic and doctor discovery/booking app with '
+          'real-time availability, Stripe payments, and a BackOffice '
+          'admin panel for managing providers and appointments.',
       tags: ['Flutter', 'GetX', 'Supabase', 'Stripe', 'flutter_map'],
-      imageAsset: null,
+      contributions: [
+        'Built real-time availability system with Supabase real-time subscriptions',
+        'Integrated Stripe payment processing across mobile and web',
+        'Delivered dual-platform (mobile + web) with shared codebase',
+      ],
+      isPrivate: true,
     ),
     ProjectData(
       title: 'D-Squares — Loyalty & Rewards App',
+      projectType: 'Loyalty & Engagement Platform',
       description:
-          'Loyalty platform with multi-method authentication, personalized '
-          'brand/offer discovery, and FCM-driven retention campaigns.',
+          'White-label loyalty platform with multi-method authentication, '
+          'personalized brand and offer discovery, and FCM-driven '
+          'retention campaigns for end-users and business partners.',
       tags: ['Flutter', 'Bloc', 'Firebase', 'Dio'],
-      imageAsset: null,
+      contributions: [
+        'Implemented multi-method authentication (email, phone, social)',
+        'Built personalized offer discovery with real-time FCM campaigns',
+        'Maintained 80%+ test coverage across all feature modules',
+      ],
+      isPrivate: true,
     ),
     ProjectData(
       title: 'Darabny — Sports Coaching Platform',
+      projectType: 'Multi-Role Sports Ecosystem',
       description:
-          'Multi-role ecosystem (coach/player/parent/child) with '
-          'role-based dashboards and a full coach/nutritionist booking '
-          'system.',
+          'Multi-role sports coaching ecosystem supporting coaches, '
+          'players, parents, and children — with role-based dashboards, '
+          'session scheduling, and a full coach/nutritionist booking system.',
       tags: ['Flutter', 'Bloc', 'Firebase', 'Dio'],
-      imageAsset: null,
+      contributions: [
+        'Designed multi-role architecture with 4 distinct user personas',
+        'Built role-based dashboards with granular permission control',
+        'Integrated coach/nutritionist booking with calendar management',
+      ],
+      isPrivate: true,
     ),
   ];
 
@@ -62,14 +92,15 @@ class ProjectsSection extends StatelessWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           final width = constraints.maxWidth;
-          final columns = width > 900 ? 3 : (width > 600 ? 2 : 1);
-          const gap = 20.0;
+          final columns = width > 800 ? 2 : 1;
+          const gap = 24.0;
           final itemWidth = (width - gap * (columns - 1)) / columns;
           return Wrap(
             spacing: gap,
             runSpacing: gap,
             children: _projects
-                .map((p) => SizedBox(width: itemWidth, child: ProjectCard(data: p)))
+                .map((p) => SizedBox(
+                    width: itemWidth, child: ProjectCard(data: p)))
                 .toList(),
           );
         },

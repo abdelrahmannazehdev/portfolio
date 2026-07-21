@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Wraps a section so it fades + slides in the first time it scrolls
-/// into view. No external package — just listens to the shared
-/// ScrollController and checks this widget's own position.
 class RevealOnScroll extends StatefulWidget {
   final Widget child;
   final ScrollController controller;
@@ -39,9 +36,8 @@ class _RevealOnScrollState extends State<RevealOnScroll> {
     final position = box.localToGlobal(Offset.zero);
     final screenHeight = MediaQuery.of(context).size.height;
     if (position.dy < screenHeight * 0.88) {
-      Future.delayed(widget.delay, () {
-        if (mounted) setState(() => _visible = true);
-      });
+      _visible = true;
+      if (mounted) setState(() {});
     }
   }
 
@@ -57,11 +53,11 @@ class _RevealOnScrollState extends State<RevealOnScroll> {
       key: _key,
       child: AnimatedOpacity(
         opacity: _visible ? 1 : 0,
-        duration: const Duration(milliseconds: 600),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.easeOut,
         child: AnimatedSlide(
           offset: _visible ? Offset.zero : const Offset(0, 0.04),
-          duration: const Duration(milliseconds: 600),
+          duration: const Duration(milliseconds: 500),
           curve: Curves.easeOut,
           child: widget.child,
         ),

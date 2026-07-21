@@ -6,13 +6,24 @@ class FooterSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final year = DateTime.now().year;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
       child: Center(
-        child: Text(
-          '© $year Abdelrahman Nazeh. Built with Flutter developers in mind.',
-          style: AppText.body(size: 13, color: AppColors.textFaint),
+        child: Text.rich(
+          TextSpan(
+            style: AppText.body(size: 13, color: AppColors.textFaint),
+            children: const [
+              TextSpan(text: '\u00a9 2026 Abdelrahman Nazeh'),
+              TextSpan(text: '     '),
+              TextSpan(
+                text: 'Built with Flutter ',
+              ),
+              TextSpan(
+                text: '\u2764',
+                style: TextStyle(color: AppColors.accentTeal),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -28,8 +28,9 @@ class ContactSection extends StatelessWidget {
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 480),
             child: Text(
-              'Open to Flutter developer roles and mobile architecture '
-              'work. Reach out directly — I usually reply within a day.',
+              'Open to Senior Flutter Developer roles and mobile '
+              'architecture work. Reach out directly — I usually '
+              'reply within a day.',
               textAlign: TextAlign.center,
               style: AppText.body(size: 15),
             ),
@@ -42,19 +43,20 @@ class ContactSection extends StatelessWidget {
             children: [
               _ContactPill(
                 label: 'abdelrahmannazehdev@gmail.com',
+                icon: Icons.email_outlined,
                 onTap: () => _open('mailto:abdelrahmannazehdev@gmail.com'),
               ),
               _ContactPill(
-                label: '+20 122 222 5103',
-                onTap: () => _open('tel:+201222225103'),
-              ),
-              _ContactPill(
                 label: 'LinkedIn',
-                onTap: () => _open('https://linkedin.com/in/abdelrahman-nazeh-dev'),
+                icon: Icons.link,
+                onTap: () => _open(
+                    'https://linkedin.com/in/abdelrahman-nazeh-dev'),
               ),
               _ContactPill(
                 label: 'GitHub',
-                onTap: () => _open('https://github.com/AbdelrahmanNazeh74'),
+                icon: Icons.code,
+                onTap: () =>
+                    _open('https://github.com/AbdelrahmanNazeh74'),
               ),
             ],
           ),
@@ -66,8 +68,13 @@ class ContactSection extends StatelessWidget {
 
 class _ContactPill extends StatefulWidget {
   final String label;
+  final IconData icon;
   final VoidCallback onTap;
-  const _ContactPill({required this.label, required this.onTap});
+  const _ContactPill({
+    required this.label,
+    required this.icon,
+    required this.onTap,
+  });
 
   @override
   State<_ContactPill> createState() => _ContactPillState();
@@ -78,23 +85,47 @@ class _ContactPillState extends State<_ContactPill> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => setState(() => _hover = true),
-      onExit: (_) => setState(() => _hover = false),
-      child: GestureDetector(
-        onTap: widget.onTap,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(999),
-            border: Border.all(color: _hover ? AppColors.accentTeal : AppColors.borderColor),
-          ),
-          child: Text(
-            widget.label,
-            style: AppText.body(
-              size: 14,
-              color: _hover ? AppColors.accentTealSoft : AppColors.textPrimary,
+    return Semantics(
+      label: 'Contact via ${widget.label}',
+      button: true,
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _hover = true),
+        onExit: (_) => setState(() => _hover = false),
+        child: GestureDetector(
+          onTap: widget.onTap,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(999),
+              border: Border.all(
+                color: _hover
+                    ? AppColors.accentTeal
+                    : AppColors.borderColor,
+              ),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  widget.icon,
+                  size: 16,
+                  color: _hover
+                      ? AppColors.accentTealSoft
+                      : AppColors.textMuted,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  widget.label,
+                  style: AppText.body(
+                    size: 14,
+                    color: _hover
+                        ? AppColors.accentTealSoft
+                        : AppColors.textPrimary,
+                  ),
+                ),
+              ],
             ),
           ),
         ),

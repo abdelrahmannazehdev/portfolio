@@ -7,27 +7,19 @@ class SkillsSection extends StatelessWidget {
   const SkillsSection({super.key, required this.sectionKey});
 
   static const _groups = [
-    [
-      'Languages & Platforms',
-      'Dart, Flutter, native Android & iOS deployment, cross-platform development'
-    ],
-    [
-      'Mobile Architecture',
-      'Modular Bloc/Cubit design, feature-module isolation, service delegation patterns, clean architecture'
-    ],
-    ['State Management', 'Bloc, Cubit, Provider, GetX'],
-    [
-      'Real-Time Systems',
-      'WebRTC (LiveKit), WebSocket messaging, Firebase Firestore sync, Supabase real-time'
-    ],
-    [
-      'Backend & Integration',
-      'REST APIs (Dio), Firebase, Supabase (PostgreSQL/BaaS), Stripe, Google Maps, presigned S3 uploads'
-    ],
-    [
-      'Quality & Delivery',
-      'Unit/integration testing (80%+ coverage), GitHub Actions CI/CD, Git, Agile/Scrum'
-    ],
+    _SkillGroup('Mobile Development', [
+      'Flutter', 'Dart', 'Android', 'iOS',
+    ]),
+    _SkillGroup('Architecture', [
+      'Clean Architecture', 'BLoC', 'Cubit', 'SOLID', 'Design Patterns',
+    ]),
+    _SkillGroup('Backend & Services', [
+      'Firebase', 'Supabase', 'REST APIs', 'Stripe', 'AWS S3',
+      'WebSockets', 'WebRTC',
+    ]),
+    _SkillGroup('Tools & Platforms', [
+      'Git', 'GitHub', 'GitHub Actions', 'CI/CD', 'Postman',
+    ]),
   ];
 
   @override
@@ -38,7 +30,7 @@ class SkillsSection extends StatelessWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           final width = constraints.maxWidth;
-          final columns = width > 900 ? 3 : (width > 600 ? 2 : 1);
+          final columns = width > 900 ? 4 : (width > 600 ? 2 : 1);
           const gap = 24.0;
           final itemWidth = (width - gap * (columns - 1)) / columns;
           return Wrap(
@@ -52,15 +44,42 @@ class SkillsSection extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          g[0],
+                          g.category,
                           style: AppText.display(
                             size: 15,
                             weight: FontWeight.w600,
                             color: AppColors.accentTealSoft,
                           ),
                         ),
-                        const SizedBox(height: 8),
-                        Text(g[1], style: AppText.body(size: 14.5)),
+                        const SizedBox(height: 12),
+                        ...g.skills.map(
+                          (s) => Padding(
+                            padding: const EdgeInsets.only(bottom: 8),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 7, right: 10),
+                                  child: Container(
+                                    width: 5,
+                                    height: 5,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppColors.accentTeal,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    s,
+                                    style: AppText.body(size: 14.5),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -71,4 +90,10 @@ class SkillsSection extends StatelessWidget {
       ),
     );
   }
+}
+
+class _SkillGroup {
+  final String category;
+  final List<String> skills;
+  const _SkillGroup(this.category, this.skills);
 }

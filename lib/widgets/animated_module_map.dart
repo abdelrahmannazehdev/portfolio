@@ -64,7 +64,7 @@ class _ModuleMapPainter extends CustomPainter {
     ];
 
     final linePaint = Paint()
-      ..color = AppColors.accentTeal.withOpacity(0.5)
+      ..color = AppColors.accentTeal.withValues(alpha: 0.5)
       ..strokeWidth = 1.6
       ..style = PaintingStyle.stroke;
 
@@ -112,9 +112,9 @@ class _ModuleMapPainter extends CustomPainter {
     const h = 58.0;
     final rect = Rect.fromCenter(center: center, width: w, height: h);
     final rrect = RRect.fromRectAndRadius(rect, const Radius.circular(10));
-    final fill = Paint()..color = AppColors.surface.withOpacity(opacity);
+    final fill = Paint()..color = AppColors.surface.withValues(alpha: opacity);
     final border = Paint()
-      ..color = AppColors.accentSky.withOpacity(opacity)
+      ..color = AppColors.accentSky.withValues(alpha: opacity)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.6;
     canvas.drawRRect(rrect, fill);

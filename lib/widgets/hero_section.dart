@@ -13,49 +13,61 @@ class HeroSection extends StatelessWidget {
     required this.onViewProjects,
   });
 
-  Future<void> _downloadCv() async {
-    // Looks for Abdelrahman_Nazeh_CV.pdf next to the deployed site.
-    // Place the file in the /web folder so Flutter web copies it as-is.
-    final uri = Uri.base.resolve('Abdelrahman_Nazeh_CV.pdf');
+  Future<void> _downloadResume() async {
+    final uri = Uri.base.resolve('Abdelrahman_Nazeh_Resume.pdf');
     await launchUrl(uri, webOnlyWindowName: '_blank');
+  }
+
+  Future<void> _openUrl(String url) async {
+    await launchUrl(Uri.parse(url), webOnlyWindowName: '_blank');
   }
 
   @override
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
-    // The module map is 700px wide and positioned to bleed off the right
-    // edge, which only reads as a decorative overlap at full desktop width.
-    // Below that it would sit on top of most of the text column, so it's
-    // hidden for tablet/narrow-laptop widths too, not just mobile.
-    final showModuleMap = MediaQuery.of(context).size.width >= Responsive.maxContentWidth;
+    final showModuleMap =
+        MediaQuery.of(context).size.width >= Responsive.maxContentWidth;
 
     final content = ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 560),
+      constraints: const BoxConstraints(maxWidth: 580),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('FLUTTER DEVELOPER', style: AppText.mono(letterSpacing: 3)),
+          Semantics(
+            label: 'Senior Flutter Developer',
+            child: Text('SENIOR FLUTTER DEVELOPER',
+                style: AppText.mono(letterSpacing: 3)),
+          ),
           const SizedBox(height: 18),
-          Text.rich(
-            TextSpan(
-              style: AppText.display(size: isMobile ? 34 : 52),
-              children: [
-                const TextSpan(text: 'Mobile Architecture &\n'),
-                TextSpan(
-                  text: 'Systems Design',
-                  style: TextStyle(color: AppColors.accentSky),
-                ),
-              ],
+          Semantics(
+            header: true,
+            child: Text.rich(
+              TextSpan(
+                style: AppText.display(size: isMobile ? 34 : 48),
+                children: const [
+                  TextSpan(
+                      text: 'Building Enterprise-Grade\n'),
+                  TextSpan(
+                    text: 'Cross-Platform Apps',
+                    style: TextStyle(color: AppColors.accentSky),
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 22),
-          Text(
-            "I design and ship cross-platform mobile applications for "
-            "Android & iOS — with a focus on modular architecture, "
-            "real-time systems, and code that scales across teams, not "
-            "just screens.",
-            style: AppText.body(size: 17),
+          Semantics(
+            label:
+                'Specializing in Flutter, Clean Architecture, and modern backend technologies',
+            child: Text(
+              'Specializing in Flutter, Clean Architecture, and modern '
+              'backend technologies. I architect and ship production '
+              'mobile applications used by thousands — with a focus on '
+              'modular systems, real-time capabilities, and code quality '
+              'that scales across teams and products.',
+              style: AppText.body(size: 17),
+            ),
           ),
           const SizedBox(height: 34),
           Wrap(
@@ -63,37 +75,76 @@ class HeroSection extends StatelessWidget {
             runSpacing: 14,
             children: [
               ElevatedButton(
-                onPressed: onViewProjects,
+                onPressed: _downloadResume,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.accentTeal,
                   foregroundColor: AppColors.bgDeep,
-                  padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 16),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  textStyle: AppText.body(size: 14.5, weight: FontWeight.w600, color: AppColors.bgDeep),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 26, vertical: 16),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
+                  textStyle: AppText.body(
+                      size: 14.5,
+                      weight: FontWeight.w600,
+                      color: AppColors.bgDeep),
                 ),
-                child: const Text('View Projects'),
+                child: Semantics(
+                  label: 'Download Resume',
+                  child: const Text('Download Resume'),
+                ),
               ),
               OutlinedButton(
-                onPressed: _downloadCv,
+                onPressed: onViewProjects,
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: AppColors.borderColor),
-                  padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 16),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 26, vertical: 16),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
                 ),
-                child: Text('Download CV', style: AppText.body(size: 14.5, color: AppColors.textPrimary)),
+                child: Text('View Projects',
+                    style: AppText.body(
+                        size: 14.5, color: AppColors.textPrimary)),
               ),
             ],
           ),
           const SizedBox(height: 30),
           Wrap(
-            spacing: 10,
+            spacing: 16,
+            runSpacing: 10,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              Text('Giza, Egypt', style: AppText.mono(size: 13.5, color: AppColors.textFaint)),
-              Text('·', style: AppText.mono(color: AppColors.textFaint)),
-              Text('3+ years experience', style: AppText.mono(size: 13.5, color: AppColors.textFaint)),
-              Text('·', style: AppText.mono(color: AppColors.textFaint)),
-              Text('Available for opportunities', style: AppText.mono(size: 13.5, color: AppColors.textFaint)),
+              _SocialIcon(
+                icon: Icons.code,
+                label: 'GitHub',
+                onTap: () =>
+                    _openUrl('https://github.com/AbdelrahmanNazeh74'),
+              ),
+              _SocialIcon(
+                icon: Icons.link,
+                label: 'LinkedIn',
+                onTap: () => _openUrl(
+                    'https://linkedin.com/in/abdelrahman-nazeh-dev'),
+              ),
+              Container(
+                width: 1,
+                height: 16,
+                color: AppColors.textFaint.withValues(alpha: 0.4),
+              ),
+              Text('Giza, Egypt',
+                  style: AppText.mono(
+                      size: 13.5, color: AppColors.textFaint)),
+              Text('·',
+                  style: AppText.mono(color: AppColors.textFaint)),
+              Text('4+ years experience',
+                  style: AppText.mono(
+                      size: 13.5, color: AppColors.textFaint)),
+              Text('·',
+                  style: AppText.mono(color: AppColors.textFaint)),
+              Text('Available',
+                  style: AppText.mono(
+                      size: 13.5,
+                      color: AppColors.accentTealSoft)),
             ],
           ),
         ],
@@ -105,23 +156,96 @@ class HeroSection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 60),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: Responsive.maxContentWidth),
+          constraints:
+              const BoxConstraints(maxWidth: Responsive.maxContentWidth),
           child: SizedBox(
             height: showModuleMap ? 620 : null,
             child: Stack(
               clipBehavior: Clip.none,
               children: [
                 if (showModuleMap)
-                  Positioned(
+                  const Positioned(
                     right: -40,
                     top: 0,
                     bottom: 0,
                     width: 700,
-                    child: Opacity(opacity: 0.9, child: const AnimatedModuleMap()),
+                    child: Opacity(
+                        opacity: 0.9, child: AnimatedModuleMap()),
                   ),
                 Align(
-                  alignment: showModuleMap ? Alignment.centerLeft : Alignment.topLeft,
+                  alignment: showModuleMap
+                      ? Alignment.centerLeft
+                      : Alignment.topLeft,
                   child: content,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SocialIcon extends StatefulWidget {
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+  const _SocialIcon({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  @override
+  State<_SocialIcon> createState() => _SocialIconState();
+}
+
+class _SocialIconState extends State<_SocialIcon> {
+  bool _hover = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      label: '${widget.label} profile',
+      button: true,
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _hover = true),
+        onExit: (_) => setState(() => _hover = false),
+        child: GestureDetector(
+          onTap: widget.onTap,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: _hover
+                    ? AppColors.accentTeal.withValues(alpha: 0.6)
+                    : AppColors.borderColor,
+              ),
+              color: _hover
+                  ? AppColors.accentTeal.withValues(alpha: 0.08)
+                  : Colors.transparent,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(widget.icon,
+                    size: 16,
+                    color: _hover
+                        ? AppColors.accentTealSoft
+                        : AppColors.textMuted),
+                const SizedBox(width: 6),
+                Text(
+                  widget.label,
+                  style: AppText.mono(
+                    size: 13,
+                    color: _hover
+                        ? AppColors.accentTealSoft
+                        : AppColors.textMuted,
+                    letterSpacing: 0.5,
+                  ),
                 ),
               ],
             ),

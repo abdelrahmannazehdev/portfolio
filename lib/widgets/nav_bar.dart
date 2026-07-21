@@ -11,7 +11,7 @@ class NavBar extends StatelessWidget {
     final isMobile = Responsive.isMobile(context);
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.bgDeep.withOpacity(0.82),
+        color: AppColors.bgDeep.withValues(alpha: 0.82),
         border: const Border(bottom: BorderSide(color: AppColors.borderColor)),
       ),
       child: Center(
@@ -25,8 +25,8 @@ class NavBar extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     style: AppText.display(size: 20, weight: FontWeight.w700),
-                    children: [
-                      const TextSpan(text: 'AN'),
+                    children: const [
+                      TextSpan(text: 'AN'),
                       TextSpan(
                         text: '.',
                         style: TextStyle(color: AppColors.accentTeal),

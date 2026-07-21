@@ -21,7 +21,7 @@ class _GridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = AppColors.accentTealSoft.withOpacity(0.035)
+      ..color = AppColors.accentTealSoft.withValues(alpha: 0.035)
       ..strokeWidth = 1;
     const step = 42.0;
     for (double x = 0; x < size.width; x += step) {

@@ -19,15 +19,15 @@ class AboutSection extends StatelessWidget {
         children: [
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(right: isMobile ? 0 : 16, bottom: isMobile ? 16 : 0),
+              padding: EdgeInsets.only(
+                  right: isMobile ? 0 : 16, bottom: isMobile ? 16 : 0),
               child: Text(
-                "I'm a Flutter Developer with 3+ years of experience "
-                "architecting and shipping cross-platform mobile "
-                "applications. My focus goes beyond writing screens — I "
-                "design the underlying architecture that lets teams build "
-                "faster: modular Bloc/Cubit systems, shared "
-                "service-delegation patterns, and clean API contracts that "
-                "scale across multiple apps at once.",
+                "I build production-grade cross-platform applications "
+                "that solve real business problems. Over the past 4+ "
+                "years, I've delivered enterprise collaboration suites, "
+                "healthcare platforms, productivity tools, loyalty "
+                "systems, and real-time communication apps — each "
+                "architected for maintainability and scale from day one.",
                 style: AppText.body(size: 16),
               ),
             ),
@@ -36,12 +36,12 @@ class AboutSection extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(left: isMobile ? 0 : 16),
               child: Text(
-                "I care about code that's still easy to work with a year "
-                "later — not just code that works today. Along the way "
-                "I've integrated Firebase, Supabase, Stripe, and real-time "
-                "systems like WebRTC and WebSockets, delivered full "
-                "RTL/Arabic localization, and maintained 80%+ test "
-                "coverage across production apps.",
+                "My approach combines Clean Architecture with modular "
+                "Bloc/Cubit state management, ensuring every feature is "
+                "isolated, testable, and easy to evolve. I prioritize "
+                "code that teams can confidently extend — not just "
+                "features that ship fast. Performance, accessibility, "
+                "and user experience are built in, not bolted on.",
                 style: AppText.body(size: 16),
               ),
             ),
